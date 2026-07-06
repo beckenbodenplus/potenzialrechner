@@ -1,554 +1,514 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beckenboden PLUS Potenzialrechner</title>
-  <meta name="description" content="Berechne Dein mögliches zusätzliches Umsatzpotenzial mit dem Beckenboden PLUS Konzept." />
+  <meta name="description" content="Berechne Dein mögliches zusätzliches Umsatzpotenzial mit dem Beckenboden PLUS Konzept.">
 
   <style>
-    :root {
-      --green: #b0c8b7;
-      --dark-green: #4d7a5f;
-      --brown: #4a3b31;
-      --bg: #f7f2ea;
-      --white: #ffffff;
-      --muted: #6b625c;
-      --border: rgba(74, 59, 49, 0.14);
-      --shadow: 0 18px 50px rgba(74, 59, 49, 0.14);
+    :root{
+      --green:#b0c8b7;
+      --green-dark:#4d7a5f;
+      --brown:#4a3b31;
+      --cream:#f7f2ea;
+      --white:#ffffff;
+      --muted:#6b625c;
+      --border:rgba(74,59,49,.16);
+      --shadow:0 18px 48px rgba(74,59,49,.16);
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:linear-gradient(180deg,var(--cream),#fff);
+      color:var(--brown);
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #f7f2ea 0%, #ffffff 100%);
-      color: var(--brown);
+    main{padding:28px 16px 60px}
+    .wrap{max-width:1120px;margin:auto}
+
+    .hero{
+      background:linear-gradient(135deg,var(--green-dark),#6f997b);
+      color:white;
+      border-radius:28px;
+      padding:44px;
+      box-shadow:var(--shadow);
     }
 
-    .page {
-      min-height: 100vh;
-      padding: 28px 18px 54px;
+    .brand{
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:14px;
+      font-weight:700;
+      opacity:.9;
+      margin-bottom:18px;
     }
 
-    .wrap {
-      width: min(1120px, 100%);
-      margin: 0 auto;
+    h1{
+      margin:0;
+      font-size:clamp(34px,5vw,60px);
+      line-height:1.05;
+      max-width:880px;
     }
 
-    .hero {
-      background: linear-gradient(135deg, var(--dark-green), #6f997b);
-      border-radius: 28px;
-      padding: 42px;
-      color: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+    .hero p{
+      font-size:clamp(17px,2vw,22px);
+      line-height:1.55;
+      max-width:830px;
+      margin:22px 0 0;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 340px;
-      height: 340px;
-      right: -120px;
-      top: -120px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      margin-top:26px;
     }
 
-    .brand {
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-      opacity: .92;
-      margin-bottom: 18px;
+    .card{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0 12px 32px rgba(74,59,49,.08);
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(34px, 5vw, 62px);
-      line-height: 1.02;
-      max-width: 880px;
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(25px,3vw,34px);
+      line-height:1.15;
     }
 
-    .hero p {
-      font-size: clamp(17px, 2vw, 22px);
-      line-height: 1.55;
-      max-width: 830px;
-      margin: 22px 0 0;
-      opacity: .95;
+    .sub{
+      color:var(--muted);
+      line-height:1.55;
+      margin:0 0 22px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 24px;
-      margin-top: 26px;
-      align-items: stretch;
+    .package{
+      display:grid;
+      grid-template-columns:1fr 155px;
+      gap:16px;
+      align-items:center;
+      padding:16px 0;
+      border-top:1px solid var(--border);
     }
 
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      padding: 28px;
-      box-shadow: 0 12px 34px rgba(74, 59, 49, 0.08);
+    .package:first-of-type{border-top:0}
+    .package strong{display:block;font-size:18px;margin-bottom:4px}
+    .package span{font-size:14px;color:var(--muted)}
+
+    .stepper{
+      display:grid;
+      grid-template-columns:42px 1fr 42px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      background:#fbfaf8;
     }
 
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.15;
+    .stepper button{
+      border:0;
+      background:#f0ebe4;
+      font-size:22px;
+      font-weight:800;
+      color:var(--brown);
+      cursor:pointer;
+      min-height:46px;
     }
 
-    .sub {
-      margin: 0 0 22px;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 16px;
+    .stepper button:hover{background:#e7dfd5}
+
+    .stepper input{
+      border:0;
+      text-align:center;
+      font-size:18px;
+      font-weight:800;
+      color:var(--brown);
+      background:transparent;
+      outline:none;
+      padding:12px 4px;
+      width:100%;
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 150px;
-      gap: 16px;
-      align-items: center;
-      padding: 16px 0;
-      border-top: 1px solid var(--border);
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button{
+      -webkit-appearance:none;
+      margin:0;
     }
 
-    .row:first-of-type {
-      border-top: 0;
+    input[type=number]{-moz-appearance:textfield}
+
+    .calc-btn{
+      width:100%;
+      margin-top:22px;
+      border:0;
+      border-radius:18px;
+      padding:17px;
+      background:var(--green-dark);
+      color:white;
+      font-weight:900;
+      font-size:17px;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(77,122,95,.28);
     }
 
-    .label strong {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 4px;
+    .result{
+      position:sticky;
+      top:20px;
+      background:linear-gradient(180deg,#fff,#f4faf6);
     }
 
-    .label span {
-      color: var(--muted);
-      font-size: 14px;
+    .badge{
+      display:inline-block;
+      background:rgba(176,200,183,.45);
+      padding:9px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:16px;
     }
 
-    .stepper {
-      display: grid;
-      grid-template-columns: 42px 1fr 42px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      background: #fbfaf8;
+    .input-list{
+      background:#f7f2ea;
+      border-radius:18px;
+      padding:16px 18px;
+      margin:18px 0;
+      line-height:1.7;
     }
 
-    .stepper button {
-      border: 0;
-      background: #f0ebe4;
-      color: var(--brown);
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-      min-height: 46px;
+    .amount{
+      background:var(--brown);
+      color:white;
+      border-radius:22px;
+      padding:24px;
+      margin:18px 0;
     }
 
-    .stepper button:hover {
-      background: #e7dfd5;
+    .amount small{
+      display:block;
+      opacity:.82;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:8px;
     }
 
-    .stepper input {
-      width: 100%;
-      border: 0;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--brown);
-      background: transparent;
-      outline: none;
+    .amount strong{
+      display:block;
+      font-size:clamp(38px,5vw,56px);
+      line-height:1;
     }
 
-    .result {
-      background: linear-gradient(180deg, #ffffff, #f4faf6);
-      position: sticky;
-      top: 20px;
-    }
-        .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 13px;
-      border-radius: 999px;
-      background: rgba(176, 200, 183, .38);
-      color: var(--brown);
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 16px;
+    .year{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      padding:16px 0;
+      margin:18px 0;
     }
 
-    .amount {
-      border-radius: 22px;
-      background: var(--brown);
-      color: #fff;
-      padding: 24px;
-      margin: 18px 0;
+    .year span{color:var(--muted)}
+    .year strong{font-size:25px}
+
+    .dynamic{
+      font-weight:800;
+      line-height:1.5;
+      margin:18px 0;
     }
 
-    .amount small {
-      display: block;
-      opacity: .8;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 6px;
-      font-size: 12px;
+    .checks{
+      list-style:none;
+      padding:0;
+      margin:18px 0;
+      display:grid;
+      gap:11px;
     }
 
-    .amount .num {
-      display: block;
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1;
-      font-weight: 900;
+    .checks li{
+      display:flex;
+      gap:10px;
+      line-height:1.4;
     }
 
-    .year {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      border-top: 1px solid var(--border);
-      margin: 12px 0 18px;
+    .checks li:before{
+      content:"✓";
+      background:var(--green);
+      color:var(--brown);
+      width:24px;
+      height:24px;
+      flex:0 0 24px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
     }
 
-    .year span {
-      color: var(--muted);
+    .section{
+      margin-top:24px;
+      background:white;
+      border:1px solid var(--border);
+      border-radius:26px;
+      padding:30px;
     }
 
-    .year strong {
-      font-size: 24px;
+    .section p{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:16px;
+      margin-bottom:0;
     }
 
-    .summary {
-      font-size: 16px;
-      line-height: 1.58;
-      color: var(--muted);
-      margin: 0 0 18px;
+    .cta-box{
+      margin-top:24px;
+      background:linear-gradient(135deg,var(--green-dark),#6f997b);
+      color:white;
+      border-radius:28px;
+      padding:34px;
+      text-align:center;
+      box-shadow:var(--shadow);
     }
 
-    .checks {
-      display: grid;
-      gap: 11px;
-      margin: 18px 0 22px;
-      padding: 0;
-      list-style: none;
+    .cta-box p{
+      color:white;
+      opacity:.95;
+      max-width:760px;
+      margin:12px auto 22px;
+      line-height:1.6;
     }
 
-    .checks li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      line-height: 1.35;
+    .cta{
+      display:inline-block;
+      background:white;
+      color:var(--brown);
+      text-decoration:none;
+      font-weight:900;
+      border-radius:18px;
+      padding:17px 26px;
     }
 
-    .checks li::before {
-      content: "✓";
-      flex: 0 0 24px;
-      height: 24px;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 8px;
-      background: var(--green);
-      color: var(--brown);
-      font-weight: 900;
+    .fineprint{
+      font-size:12px;
+      color:#7a716b;
+      line-height:1.45;
+      margin-top:14px;
     }
 
-    .cta {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      background: var(--dark-green);
-      color: #fff;
-      font-weight: 900;
-      border-radius: 16px;
-      padding: 17px 18px;
-      box-shadow: 0 10px 24px rgba(77,122,95,.26);
-      margin-top: 20px;
-    }
-
-    .fineprint {
-      margin: 14px 0 0;
-      font-size: 12px;
-      line-height: 1.45;
-      color: #7a716b;
-    }
-
-    .section {
-      margin-top: 24px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      padding: 30px;
-    }
-
-    .section h2 {
-      margin: 0 0 10px;
-      font-size: clamp(24px, 3vw, 34px);
-    }
-
-    .section p {
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .pill-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .pill {
-      background: #f4faf6;
-      border: 1px solid rgba(176, 200, 183, .75);
-      border-radius: 18px;
-      padding: 18px;
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    @media (max-width: 860px) {
-      .hero {
-        padding: 30px 22px;
-        border-radius: 22px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .result {
-        position: static;
-      }
-
-      .card {
-        padding: 22px;
-        border-radius: 22px;
-      }
-
-      .row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .pill-grid {
-        grid-template-columns: 1fr;
-      }
+    @media(max-width:860px){
+      main{padding:16px 12px 42px}
+      .hero{padding:30px 22px;border-radius:22px}
+      .grid{grid-template-columns:1fr}
+      .result{position:static}
+      .package{grid-template-columns:1fr}
+      .card{padding:22px;border-radius:22px}
+      .cta-box{padding:28px 20px;border-radius:22px}
     }
   </style>
 </head>
 
 <body>
-  <main class="page">
-    <div class="wrap">
-      <section class="hero">
-        <div class="brand">Beckenboden PLUS Konzept</div>
-        <h1>Wie viel Umsatzpotenzial steckt bereits in Deinem Studio?</h1>
-        <p>
-          Gib ein, wie viele Pakete Du durchschnittlich pro Monat verkaufst.
-          Auf Basis der Mehrerlöse unserer Partnerstudios berechnen wir Dein mögliches Zusatzpotenzial.
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <div class="brand">Beckenboden PLUS Konzept</div>
+      <h1>Wie viel zusätzliches Umsatzpotenzial steckt bereits in Deinen aktuellen Verkäufen?</h1>
+      <p>
+        Gib ein, wie viele Pakete Du durchschnittlich pro Monat verkaufst.
+        Auf Basis der Erfahrungen unserer Partnerstudios berechnen wir Dein mögliches zusätzliches Umsatzpotenzial.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Deine Paketverkäufe pro Monat</h2>
+        <p class="sub">
+          Trage Deine durchschnittlichen Verkäufe ein. Anschließend berechnet der Rechner Dein mögliches Zusatzpotenzial.
         </p>
-      </section>
 
-      <section class="grid">
-        <div class="card">
-          <h2>Deine Verkäufe pro Monat</h2>
-          <p class="sub">Trage die durchschnittliche Anzahl Deiner verkauften Karten ein. Das Ergebnis aktualisiert sich automatisch.</p>
-
-          <div class="row">
-            <div class="label">
-              <strong>10er Karte</strong>
-              <span>Mehrumsatz: 150 € pro Verkauf</span>
-            </div>
-            <div class="stepper">
-              <button type="button" data-action="minus" data-target="card10">−</button>
-              <input id="card10" type="number" min="0" value="0" inputmode="numeric" />
-              <button type="button" data-action="plus" data-target="card10">+</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="label">
-              <strong>20er Karte</strong>
-              <span>Mehrumsatz: 150 € pro Verkauf</span>
-            </div>
-            <div class="stepper">
-              <button type="button" data-action="minus" data-target="card20">−</button>
-              <input id="card20" type="number" min="0" value="0" inputmode="numeric" />
-              <button type="button" data-action="plus" data-target="card20">+</button>
-            </div>
-          </div>
-                    <div class="row">
-            <div class="label">
-              <strong>30er Karte</strong>
-              <span>Mehrumsatz: 200 € pro Verkauf</span>
-            </div>
-            <div class="stepper">
-              <button type="button" data-action="minus" data-target="card30">−</button>
-              <input id="card30" type="number" min="0" value="0" inputmode="numeric" />
-              <button type="button" data-action="plus" data-target="card30">+</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="label">
-              <strong>40er Karte</strong>
-              <span>Mehrumsatz: 380 € pro Verkauf</span>
-            </div>
-            <div class="stepper">
-              <button type="button" data-action="minus" data-target="card40">−</button>
-              <input id="card40" type="number" min="0" value="0" inputmode="numeric" />
-              <button type="button" data-action="plus" data-target="card40">+</button>
-            </div>
+        <div class="package">
+          <div><strong>10er-Pakete</strong><span>150 € Mehrumsatz pro Verkauf</span></div>
+          <div class="stepper">
+            <button type="button" data-action="minus" data-target="card10">−</button>
+            <input id="card10" type="number" min="0" value="0">
+            <button type="button" data-action="plus" data-target="card10">+</button>
           </div>
         </div>
 
-        <aside class="card result">
-          <div class="badge">Live-Berechnung</div>
-          <h2>Dein mögliches Zusatzpotenzial</h2>
-          <p class="sub">Basierend auf Deinen aktuellen Paketverkäufen.</p>
-
-          <div class="amount">
-            <small>Mehrumsatz pro Monat</small>
-            <span class="num" id="monthly">0 €</span>
+        <div class="package">
+          <div><strong>20er-Pakete</strong><span>150 € Mehrumsatz pro Verkauf</span></div>
+          <div class="stepper">
+            <button type="button" data-action="minus" data-target="card20">−</button>
+            <input id="card20" type="number" min="0" value="0">
+            <button type="button" data-action="plus" data-target="card20">+</button>
           </div>
-
-          <div class="year">
-            <span>Mehrumsatz pro Jahr</span>
-            <strong id="yearly">0 €</strong>
-          </div>
-
-          <p class="summary" id="summary">
-            Sobald Du Deine Verkaufszahlen einträgst, siehst Du hier Dein mögliches Umsatzpotenzial.
-          </p>
-
-          <ul class="checks">
-            <li>ohne zusätzliche Trainingsfläche</li>
-            <li>ohne weitere Geräte</li>
-            <li>ohne zusätzliches Personal</li>
-            <li>mit Deinem bestehenden Beckenboden-Angebot</li>
-          </ul>
-
-          <a class="cta" href="https://calendly.com/beckenbodenpluskonzept/meeting" target="_blank" rel="noopener">
-            Kostenlosen 30-Minuten Analysecall buchen
-          </a>
-
-          <p class="fineprint">
-            Hinweis: Die Berechnung basiert auf möglichen Mehrerlösen durch die Integration des Beckenboden PLUS Konzepts.
-            Die tatsächlichen Ergebnisse hängen von Angebotsstruktur, Umsetzung und Verkaufsgespräch im jeweiligen Studio ab.
-          </p>
-        </aside>
-      </section>
-
-      <section class="section">
-        <h2>Warum dieser Rechner?</h2>
-        <p>
-          Viele Studios verkaufen bereits regelmäßig Beckenbodenstuhl-Pakete. Das Potenzial entsteht nicht durch mehr Fläche,
-          mehr Geräte oder zusätzliches Personal, sondern durch die sinnvolle Erweiterung des bestehenden Angebots zu einem
-          ganzheitlichen Beckenbodenkonzept.
-        </p>
-        <div class="pill-grid">
-          <div class="pill">Beckenbodenstuhl bleibt das Herzstück</div>
-          <div class="pill">Funktionelles Training ergänzt die Sitzungen</div>
-          <div class="pill">Alltagsintegration erhöht den wahrgenommenen Wert</div>
         </div>
-      </section>
-    </div>
-  </main>
 
-  <script>
-    const rates = {
-      card10: 150,
-      card20: 150,
-      card30: 200,
-      card40: 380
-    };
+        <div class="package">
+          <div><strong>30er-Pakete</strong><span>200 € Mehrumsatz pro Verkauf</span></div>
+          <div class="stepper">
+            <button type="button" data-action="minus" data-target="card30">−</button>
+            <input id="card30" type="number" min="0" value="0">
+            <button type="button" data-action="plus" data-target="card30">+</button>
+          </div>
+        </div>
 
-    const labels = {
-      card10: "10er-Karten",
-      card20: "20er-Karten",
-      card30: "30er-Karten",
-      card40: "40er-Karten"
-    };
+        <div class="package">
+          <div><strong>40er-Pakete</strong><span>380 € Mehrumsatz pro Verkauf</span></div>
+          <div class="stepper">
+            <button type="button" data-action="minus" data-target="card40">−</button>
+            <input id="card40" type="number" min="0" value="0">
+            <button type="button" data-action="plus" data-target="card40">+</button>
+          </div>
+        </div>
 
-    const euro = (value) => value.toLocaleString("de-DE") + " €";
+        <button class="calc-btn" onclick="calculate()">Potenzial berechnen</button>
+      </div>
 
-    function getValue(id) {
-      const input = document.getElementById(id);
-      const parsed = parseInt(input.value, 10);
-      return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
-    }
+      <aside class="card result">
+        <div class="badge">Dein Ergebnis</div>
+        <h2>Mögliches Zusatzpotenzial</h2>
+        <p class="sub">Auf Basis Deiner aktuellen Paketverkäufe.</p>
 
-    function calculate() {
-      let monthly = 0;
-      let totalCards = 0;
-      const parts = [];
+        <div class="input-list" id="inputText">
+          Gib links Deine Paketverkäufe ein.
+        </div>
 
-      Object.keys(rates).forEach((id) => {
-        const count = getValue(id);
-        const subtotal = count * rates[id];
-        monthly += subtotal;
-        totalCards += count;
+        <div class="amount">
+          <small>Zusätzlicher Umsatz pro Monat</small>
+          <strong id="monthly">0 €</strong>
+        </div>
 
-        if (count > 0) {
-          parts.push(count + " " + labels[id]);
-        }
-      });
+        <div class="year">
+          <span>Zusätzlicher Umsatz pro Jahr</span>
+          <strong id="yearly">0 €</strong>
+        </div>
 
-      const yearly = monthly * 12;
+        <div class="dynamic" id="dynamicText">
+          Sobald Du Deine Zahlen eingibst, siehst Du hier Dein mögliches Potenzial.
+        </div>
 
-      document.getElementById("monthly").textContent = euro(monthly);
-      document.getElementById("yearly").textContent = euro(yearly);
+        <ul class="checks">
+          <li>ohne zusätzliche Trainingsfläche</li>
+          <li>ohne weitere Geräte</li>
+          <li>ohne zusätzliches Personal</li>
+          <li>mit Deinen aktuellen Verkäufen</li>
+        </ul>
 
-      const summary = document.getElementById("summary");
+        <p class="fineprint">
+          Hinweis: Die Berechnung basiert auf möglichen Mehrerlösen durch die Integration des Beckenboden PLUS Konzepts.
+          Tatsächliche Ergebnisse hängen von Angebotsstruktur, Umsetzung und Verkaufsgespräch im jeweiligen Studio ab.
+        </p>
+      </aside>
+    </section>
 
-      if (monthly === 0) {
-        summary.textContent = "Sobald Du Deine Verkaufszahlen einträgst, siehst Du hier Dein mögliches Umsatzpotenzial.";
-      } else {
-        const avg = Math.round(monthly / Math.max(totalCards, 1));
-        summary.textContent =
-          "Bei " + parts.join(", ") +
-          " ergibt sich ein mögliches Zusatzpotenzial von " +
-          euro(monthly) + " pro Monat bzw. " + euro(yearly) +
-          " pro Jahr. Das entspricht durchschnittlich ca. " + euro(avg) +
-          " zusätzlichem Umsatz pro verkauftem Paket.";
+    <section class="section">
+      <h2>Dieses Potenzial steckt bereits in Deinen heutigen Verkäufen.</h2>
+      <p>
+        Es geht nicht darum, mehr Kundinnen und Kunden zu gewinnen. Es geht darum, Dein bestehendes Angebot sinnvoll zu erweitern
+        und dadurch bei den Verkäufen, die Du ohnehin bereits tätigst, einen höheren Mehrwert für Deine Kundinnen und Kunden
+        sowie einen höheren Umsatz für Dein Studio zu erzielen.
+      </p>
+    </section>
+
+    <section class="cta-box">
+      <h2>Lass uns gemeinsam prüfen, welches Potenzial in Deinem Studio steckt.</h2>
+      <p>
+        In einem unverbindlichen 30-minütigen Analysegespräch schauen wir gemeinsam, ob das Konzept zu Deinem Studio passt,
+        welches Umsatzpotenzial realistisch ist und wie sich Beckenboden PLUS in Dein bestehendes Angebot integrieren lässt.
+      </p>
+      <a class="cta" href="https://calendly.com/beckenbodenpluskonzept/meeting" target="_blank" rel="noopener">
+        Kostenlosen 30-Minuten Analysecall buchen
+      </a>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  const rates = {
+    card10: 150,
+    card20: 150,
+    card30: 200,
+    card40: 380
+  };
+
+  const names = {
+    card10: "10er-Paket",
+    card20: "20er-Paket",
+    card30: "30er-Paket",
+    card40: "40er-Paket"
+  };
+
+  function euro(value){
+    return value.toLocaleString("de-DE") + " €";
+  }
+
+  function value(id){
+    const number = parseInt(document.getElementById(id).value, 10);
+    return Number.isFinite(number) && number > 0 ? number : 0;
+  }
+
+  function pluralName(id, count){
+    return count === 1 ? names[id] : names[id] + "e";
+  }
+
+  function calculate(){
+    let monthly = 0;
+    let total = 0;
+    let list = [];
+
+    Object.keys(rates).forEach(id => {
+      const count = value(id);
+
+      if(count > 0){
+        monthly += count * rates[id];
+        total += count;
+        list.push(count + " × " + pluralName(id, count));
       }
+    });
+
+    const yearly = monthly * 12;
+
+    document.getElementById("monthly").textContent = euro(monthly);
+    document.getElementById("yearly").textContent = euro(yearly);
+
+    document.getElementById("inputText").innerHTML =
+      list.length ? "<strong>Deine Eingaben:</strong><br>" + list.join("<br>") : "Gib links Deine Paketverkäufe ein.";
+
+    const dynamic = document.getElementById("dynamicText");
+
+    if(monthly === 0){
+      dynamic.textContent = "Sobald Du Deine Zahlen eingibst, siehst Du hier Dein mögliches Potenzial.";
+    } else if(monthly < 1000){
+      dynamic.textContent = "Bereits mit wenigen Paketverkäufen entsteht ein zusätzliches Potenzial von " + euro(yearly) + " pro Jahr.";
+    } else if(monthly < 3000){
+      dynamic.textContent = "In Deinem Studio steckt bereits ein interessantes zusätzliches Umsatzpotenzial von " + euro(yearly) + " pro Jahr.";
+    } else {
+      dynamic.textContent = "Dein Studio verfügt bereits heute über ein sehr attraktives Zusatzpotenzial von " + euro(yearly) + " pro Jahr. Ein Analysegespräch lohnt sich besonders.";
     }
+  }
 
-    document.querySelectorAll("input[type='number']").forEach((input) => {
-      input.addEventListener("input", () => {
-        if (parseInt(input.value, 10) < 0) input.value = 0;
-        calculate();
-      });
+  document.querySelectorAll(".stepper button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById(btn.dataset.target);
+      const current = value(btn.dataset.target);
+      target.value = btn.dataset.action === "plus" ? current + 1 : Math.max(0, current - 1);
+      calculate();
     });
+  });
 
-    document.querySelectorAll(".stepper button").forEach((button) => {
-      button.addEventListener("click", () => {
-        const target = document.getElementById(button.dataset.target);
-        const current = getValue(button.dataset.target);
-        target.value = button.dataset.action === "plus" ? current + 1 : Math.max(0, current - 1);
-        calculate();
-      });
-    });
+  document.querySelectorAll("input").forEach(input => {
+    input.addEventListener("input", calculate);
+  });
 
-    calculate();
-  </script>
+  calculate();
+</script>
 </body>
 </html>
